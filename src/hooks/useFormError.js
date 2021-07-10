@@ -47,7 +47,10 @@ const useFormError = () => {
         setErrorMsg(INIT_VALUE);
     }
 
-    return [errorMsg, translateErrorMsg, resetErrorMsg];
+    const isError = errorMsg.formErrors.length > 0 ||
+        Object.keys(errorMsg.fieldErrors).length > 0;
+
+    return [errorMsg, translateErrorMsg, isError, resetErrorMsg];
 }
 
 export default useFormError;

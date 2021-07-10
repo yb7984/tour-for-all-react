@@ -8,6 +8,9 @@
 | `App` || The main container of this whole app. |
 | -- `Navbar` || Navigation bar for this whole app. |
 | -- `Loading` || Component to show when loading data. |
+| -- `SnackAlert` || Component to show alert message. |
+| -- `Error` || Component to show when something unexpected happen.|
+| -- `ImageUpload` || Component to handle image file upload. |
 | -- `Routes` || Component that contains all the routes. |
 | ---- `HomePage` | / | Homepage |
 | ---- `Login` | /login | Login page. |

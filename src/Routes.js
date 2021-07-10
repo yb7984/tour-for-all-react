@@ -4,6 +4,10 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
+import Tours from "./Tours";
+import MyTours from "./MyTours";
+import MyJoined from "./MyJoined";
+import MyFavorites from "./MyFavorites";
 
 function Routes() {
     return (
@@ -19,6 +23,18 @@ function Routes() {
             </Route>
             <Route exact path="/profile">
                 <Profile />
+            </Route>
+            <Route path="/tours">
+                <Tours />
+            </Route>
+            <Route path="/mytours">
+                <MyTours />
+            </Route>
+            <Route path="/myjoined">
+                <MyJoined />
+            </Route>
+            <Route path="/myfavorites">
+                <MyFavorites />
             </Route>
         </Switch>
     );

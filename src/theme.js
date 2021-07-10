@@ -16,9 +16,20 @@ const theme = createMuiTheme({
         background: {
             default: '#fff',
         },
+        grey: {
+            main: "lightgrey"
+        }
     },
     form: {
         width: '100%'
+    },
+    overrides: {
+        MuiContainer: {
+            root: {
+                paddingLeft: '0px',
+                paddingRight: '0px'
+            }
+        },
     }
 });
 

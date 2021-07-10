@@ -13,7 +13,7 @@ function users(state = INITIAL_STATE, action) {
         case LOAD_USER:
             return {
                 ...state,
-                [action.payload.username]: { ...action.payload }
+                [action.payload.username]: action.payload
             };
 
         default:

@@ -51,57 +51,55 @@ const Login = () => {
     }
 
 
-    if (!loading) {
-        return (
-            <Container maxWidth="sm">
-                <form onSubmit={handleSubmit} className={classes.root}>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <Typography variant="h3">User Login</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography color="error">{errorMsg.formErrors.length > 0 && "Invalid username / password!"}</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField id="username" name="username" type="text"
-                                label="Username" variant="outlined" fullWidth
-                                required
-                                autoFocus
-                                onChange={handleChange}
-                                inputProps={
-                                    {
-                                        placeholder: "Enter username",
-
-                                    }
-                                } />
-                            <TextField id="password" name="password" type="password"
-                                label="Password" variant="outlined" fullWidth
-                                required
-                                onChange={handleChange}
-                                inputProps={
-                                    {
-                                        placeholder: "Enter password",
-
-                                    }
-                                } />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <Button variant="contained" color="primary" type="submit">
-                                Login
-                            </Button>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="h6">
-                                No account? just <Link to="/signup">Sign up</Link> here.
-                            </Typography>
-                        </Grid>
+    return (
+        <Container maxWidth="sm">
+            <form onSubmit={handleSubmit} className={classes.root}>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <Typography variant="h3">User Login</Typography>
                     </Grid>
-                </form>
-            </Container>);
-    } else {
-        return (<Loading />)
-    }
+                    <Grid item xs={12}>
+                        <Typography color="error">{errorMsg.formErrors.length > 0 && "Invalid username / password!"}</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField id="username" name="username" type="text"
+                            label="Username" variant="outlined" fullWidth
+                            required
+                            autoFocus
+                            onChange={handleChange}
+                            inputProps={
+                                {
+                                    placeholder: "Enter username",
+
+                                }
+                            } />
+                        <TextField id="password" name="password" type="password"
+                            label="Password" variant="outlined" fullWidth
+                            required
+                            onChange={handleChange}
+                            inputProps={
+                                {
+                                    placeholder: "Enter password",
+
+                                }
+                            } />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Button variant="contained" color="primary" type="submit">
+                            Login
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h6">
+                            No account? just <Link to="/signup">Sign up</Link> here.
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </form>
+            <Loading open={loading} />
+        </Container>
+    );
 }
 
 export default Login;

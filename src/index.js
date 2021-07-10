@@ -18,9 +18,10 @@ import { Provider } from "react-redux";
 import { store, persistedStore } from "./store";
 import '@fontsource/roboto';
 
+document.title = "Tour For All";
 ReactDOM.render(
     <Provider store={store}>
-        <PersistGate loading={<Loading />} persistor={persistedStore}>
+        <PersistGate loading={<Loading open={true} />} persistor={persistedStore}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <App />

@@ -1,10 +1,16 @@
 import User from "../models/user";
-import { AUTH_SET_TOKEN, AUTH_RESET } from "../actions/types";
+import { AUTH_SET_TOKEN, RESET_ALL } from "../actions/types";
+import { clearClockSockets } from "./clock";
+
+/** actions for auth */
 
 function login(username, password, setLoading, setError) {
     return async function (dispatch) {
-        dispatch(reset());
+        dispatch(resetAll());
+        clearClockSockets();        // close all socket connections
+
         setLoading && setLoading(true);
+
         try {
             const res = await User.login(username, password);
 
@@ -20,14 +26,17 @@ function login(username, password, setLoading, setError) {
 
 function logout() {
     return async function (dispatch) {
-        dispatch(reset());
+        dispatch(resetAll());
+        clearClockSockets();        // close all socket connections
     }
 }
 
 
 function signup(data, setLoading, setError) {
     return async function (dispatch) {
-        dispatch(reset());
+        dispatch(resetAll());
+        clearClockSockets();        // close all socket connections
+
         setLoading && setLoading(true);
         try {
             const res = await User.register(data);
@@ -51,8 +60,8 @@ function gotToken(token) {
     };
 }
 
-function reset() {
-    return { type: AUTH_RESET };
+function resetAll() {
+    return { type: RESET_ALL };
 }
 
 export {

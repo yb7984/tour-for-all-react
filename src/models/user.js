@@ -1,5 +1,6 @@
 import { ROLE_USER } from './role';
 import TourForAllAPI from "../api";
+import defaultImage from "../images/avatar.png";
 
 
 /** Data model for users. */
@@ -23,8 +24,15 @@ class User {
 
     tours = {};
 
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+
     get imageUrl() {
-        return this.image;
+        if (this.image.length > 0) {
+            return TourForAllAPI.getImageUrl(this.image);
+        }
+        return defaultImage;
     }
 
     constructor(obj) {
@@ -45,7 +53,6 @@ class User {
     }
 
     static async register(data) {
-        console.log(data);
         return await TourForAllAPI.request(
             `auth/register`,
             data,
@@ -82,7 +89,7 @@ class User {
     static async update(username, data) {
 
         delete data.username;
-        if (!data.password){
+        if (!data.password) {
             delete data.password;
         }
 
@@ -95,6 +102,22 @@ class User {
             return new User(res.user);
         }
         return null;
+    }
+
+    /**
+     * Follow or Defollow a tournament
+     * @param {String} username
+     * @param {Integer} tourId 
+     * @param {Boolean} isFollow 
+     * @returns tourId
+     */
+    static async followTour(username, tourId, isFollow = true) {
+        const res = await TourForAllAPI.request(
+            `tours/${tourId}/follow/${username}`,
+            {},
+            isFollow ? "post" : "delete");
+
+        return res;
     }
 }
 

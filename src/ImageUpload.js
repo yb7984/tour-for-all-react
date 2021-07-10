@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2)
     },
     image: {
-        maxWidth: "50%"
+        maxWidth: "50%",
+        maxHeight: "200px"
     }
 }));
 

@@ -6,7 +6,7 @@ import {
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./actions/auth";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { ReactComponent as PokerIcon } from './images/poker1.svg';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
@@ -15,6 +15,7 @@ import StarsIcon from '@material-ui/icons/Stars';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import MoneyIcon from '@material-ui/icons/Money';
 import { getUser } from "./actions/users";
 import Loading from "./Loading";
 
@@ -73,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Navbar = () => {
+const Navbar = memo(() => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -145,6 +146,10 @@ const Navbar = () => {
                                 <ListItemIcon><SvgIcon><PokerIcon /></SvgIcon></ListItemIcon>}
                             <ListItemText>My Tours</ListItemText>
                         </ListItem>
+                        <ListItem button component={NavLink} to="/myjoined" className={listItem}>
+                            {vertical && <ListItemIcon><MoneyIcon /></ListItemIcon>}
+                            <ListItemText>Joined</ListItemText>
+                        </ListItem>
                         <ListItem button component={NavLink} to="/myfavorites" className={listItem}>
                             {vertical && <ListItemIcon><StarsIcon /></ListItemIcon>}
                             <ListItemText>Favorites</ListItemText>
@@ -176,42 +181,40 @@ const Navbar = () => {
         </Typography>);
     }
 
-    if (!loading) {
-        return (
-            <AppBar position="static">
-                <Toolbar>
-                    <Box display={{ xs: "inline", md: "none" }}>
-                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
-                            onClick={toggleDrawer(true)}>
-                            <MenuIcon />
-                        </IconButton>
-                        <Drawer anchor="left" open={menuOpen} onClose={toggleDrawer(false)}>
-                            <div
-                                className={classes.list}
-                                role="presentation"
-                                onClick={toggleDrawer(false)}
-                                onKeyDown={toggleDrawer(false)}
-                            >
-                                {menuList()}
-                            </div>
-                        </Drawer>
-                    </Box>
-                    <Typography variant="h6" className={classes.title}>
-                        <Button color="inherit" to="/" component={NavLink} className={classes.titleButton}>
-                            <SvgIcon className={classes.titleIcon}>
-                                <PokerIcon />
-                            </SvgIcon>
-                            Tour for All
-                        </Button>
-                    </Typography>
-                    <Box display={{ xs: "none", sm: "none", md: "inline" }}>
-                        {menuList(false)}
-                    </Box>
-                </Toolbar>
-            </AppBar >
-        );
-    }
-    return (<Loading />);
-}
+    return (
+        <AppBar position="static">
+            <Toolbar>
+                <Box display={{ xs: "inline", md: "none" }}>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
+                        onClick={toggleDrawer(true)}>
+                        <MenuIcon />
+                    </IconButton>
+                    <Drawer anchor="left" open={menuOpen} onClose={toggleDrawer(false)}>
+                        <div
+                            className={classes.list}
+                            role="presentation"
+                            onClick={toggleDrawer(false)}
+                            onKeyDown={toggleDrawer(false)}
+                        >
+                            {menuList()}
+                        </div>
+                    </Drawer>
+                </Box>
+                <Typography variant="h6" className={classes.title}>
+                    <Button color="inherit" to="/" component={NavLink} className={classes.titleButton}>
+                        <SvgIcon className={classes.titleIcon}>
+                            <PokerIcon />
+                        </SvgIcon>
+                        Tour for All
+                    </Button>
+                </Typography>
+                <Box display={{ xs: "none", sm: "none", md: "inline" }}>
+                    {menuList(false)}
+                </Box>
+            </Toolbar>
+            <Loading open={loading} />
+        </AppBar >
+    );
+});
 
 export default Navbar;

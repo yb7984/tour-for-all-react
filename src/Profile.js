@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import { useState } from 'react';
 import useFormError from './hooks/useFormError';
 import ImageUpload from './ImageUpload';
+import Error from './Error';
+import SnackAlert from './SnackAlert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,15 +46,15 @@ const Profile = () => {
         image: user.image,
     });
     const [loading, setLoading] = useState(false);
+    const [updating, setUpdating] = useState(false);
     const [uploading, setUploading] = useState(false);
-    const [errorMsg, setErrorMsg] = useFormError();
+    const [errorMsg, setErrorMsg, isError] = useFormError();
 
     if (!username) {
         return (<Redirect to="/login" />);
     }
 
     const setImage = (image) => {
-        console.log(image)
         setFormData(fData => ({
             ...fData,
             image: image
@@ -62,12 +64,24 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        dispatch(updateUser(username, formData, setLoading, setErrorMsg));
+        dispatch(updateUser(username, { ...formData }, setLoading, setErrorMsg));
+        setUpdating(true);
     }
 
-    if (!loading) {
+    const handleAlertClose = (event, reason) => {
+        setUpdating(false);
+    };
+
+    if (user) {
         return (
             <Container maxWidth="sm">
+                <SnackAlert open={updating && !loading && !isError}
+                    message="Successfully updated profile!"
+                    handleClose={handleAlertClose} />
+                <SnackAlert open={updating && !loading && errorMsg.formErrors.length > 0}
+                    message={errorMsg.formErrors}
+                    serverity="error"
+                    handleClose={handleAlertClose} />
                 <form onSubmit={handleSubmit} className={classes.root}>
                     <Grid container>
                         <Grid item xs={12}>
@@ -143,7 +157,7 @@ const Profile = () => {
                                 label="Phone" variant="outlined" fullWidth
                                 onChange={handleChange}
                                 error={!!errorMsg.fieldErrors.phone}
-                                helperText={errorMsg.fieldErrors.phone}
+                                helperText={!!errorMsg.fieldErrors.phone && "Phone number must be 10 digits"}
                                 value={formData.phone}
                                 inputProps={
                                     {
@@ -164,10 +178,11 @@ const Profile = () => {
                         </Grid>
                     </Grid>
                 </form>
+                <Loading open={loading} />
             </Container>);
-    } else {
-        return (<Loading />)
     }
+    return <Error />;
+
 }
 
 export default Profile;

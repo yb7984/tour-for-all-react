@@ -1,4 +1,4 @@
-import { AUTH_SET_TOKEN, AUTH_RESET } from "../actions/types";
+import { AUTH_SET_TOKEN, RESET_ALL } from "../actions/types";
 import { ROLE_USER } from "../models/role";
 import jwt from "jsonwebtoken";
 
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 
 function auth(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case AUTH_RESET:
+        case RESET_ALL:
             return { ...INITIAL_STATE };
         case AUTH_SET_TOKEN:
             const token = action.payload;

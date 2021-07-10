@@ -2,6 +2,7 @@ import axios from "axios";
 import { store } from "./store";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3002";
+const BASE_WS_URL = process.env.REACT_APP_BASE_WS_URL || "ws://localhost:3002";
 
 /** API Class.
  *
@@ -43,6 +44,7 @@ class TourForAllAPI {
         try {
             return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
+            console.log(endpoint, data, method);
             console.error("API Error:", err.response);
             let message = err.response.data.error.message;
             throw Array.isArray(message) ? message : [message];
@@ -81,6 +83,16 @@ class TourForAllAPI {
      */
     static getImageUrl(image) {
         return `${BASE_URL}${image}`;
+    }
+
+
+    /**
+     * Return the web socket connection
+     * @param {String} endpoint 
+     * @returns 
+     */
+    static getSocket(endpoint) {
+        return new WebSocket(`${BASE_WS_URL}/${endpoint}`);
     }
 }
 
