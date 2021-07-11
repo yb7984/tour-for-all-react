@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+/** Button for add to favorite and remove from favorite */
 const TourFollowButton = ({ tour }) => {
     const classes = useStyles();
     const dispatch = useDispatch();

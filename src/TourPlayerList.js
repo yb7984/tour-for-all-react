@@ -10,6 +10,13 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "1.5em",
         padding: theme.spacing(2)
     },
+    chips: {
+        '& > *': {
+            margin: theme.spacing(0.5),
+            fontSize: "1.5em",
+            padding: theme.spacing(1)
+        },
+    }
 }));
 
 const TourPlayerList = ({ tour, user }) => {
@@ -24,9 +31,11 @@ const TourPlayerList = ({ tour, user }) => {
     return (
         <Grid container className={classes.root}>
             <Grid item xs={12} className={classes.title}>Players</Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} className={classes.chips}>
                 {
-                    Object.keys(tour.players).map(username => (<UserChip key={username} username={username} />))
+                    Object.keys(tour.players).map(username => (
+                        <UserChip key={username} username={username} />
+                    ))
                 }
             </Grid>
         </Grid>)

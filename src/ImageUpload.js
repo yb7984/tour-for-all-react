@@ -60,9 +60,9 @@ const ImageUpload = ({ uploading, setUploading, image, setImage, label }) => {
                     accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif"
                 />
             </Button>
-            <Typography color="error">{error}</Typography>
             <img alt={image} src={image ? TourForAllAPI.getImageUrl(image) : defaultImage}
                 className={classes.image} />
+            <Typography color="error">{error ? "Error when uploading" : null}</Typography>
         </>
     )
 }

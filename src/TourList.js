@@ -38,6 +38,7 @@ const TourList = ({ type = "public", perPage = 12 }) => {
     const [loading, setLoading] = useState(false);
     const [loadingTour, setLoadingTour] = useState(false);
     const [error, setError] = useState(false);
+    const [errorTour, setErrorTour] = useState(false);
 
     const { currentPage, total, tours, searchString, listType } = useSelector(st => st.tours.list[type]);
     const { searchParams, search, hash, pathname } = useQueryParams();
@@ -60,7 +61,7 @@ const TourList = ({ type = "public", perPage = 12 }) => {
     useEffect(() => {
         if (slug && slug !== "new" && !tour) {
             // when get slug and the slug is not new, fetch the tour detail
-            dispatch(getTour(slug, setLoadingTour, setError));
+            dispatch(getTour(slug, setLoadingTour, setErrorTour));
         }
     }, [dispatch, slug, tour]);
 
@@ -89,7 +90,7 @@ const TourList = ({ type = "public", perPage = 12 }) => {
         setError(false);
     }
 
-    if (slug && !loadingTour && !tour && error) {
+    if (slug && !loadingTour && !tour && errorTour) {
         //can't find the tour information, go back to the list
         return <Redirect to={`${pathname}${search && search}`} />;
     }

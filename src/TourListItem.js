@@ -1,4 +1,4 @@
-import { Card, CardHeader, Avatar, makeStyles, CardContent, Typography, Chip } from "@material-ui/core";
+import { Card, CardHeader, Avatar, makeStyles, CardContent, Typography, Chip, Tooltip } from "@material-ui/core";
 import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./actions/users";
@@ -10,7 +10,11 @@ import UserChip from "./UserChip";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minHeight: "400px"
+        minHeight: "400px",
+        "& .MuiCardHeader-content": {
+            whiteSpace: "nowrap",
+            overflow: "hidden"
+        }
     },
     title: {
         textAlign: "center",
@@ -61,7 +65,13 @@ const TourListItem = memo(({ tour }) => {
         <Card className={classes.root}>
             <CardHeader
                 avatar={<UserChip username={tour.creator} showName={false} />}
-                title={<Link to={`${search}#${tour.slug}`}>{tour.title}</Link>} className={classes.title}
+                title={<>
+                    <Tooltip title={tour.title}>
+                        <div>
+                            <Link to={`${search}#${tour.slug}`}>{tour.title}</Link>
+                        </div>
+                    </Tooltip>
+                </>} className={classes.title}
                 action={<>
                     <TourFollowButton tour={tour} />
                 </>}

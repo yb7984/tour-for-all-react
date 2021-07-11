@@ -1,8 +1,10 @@
 import axios from "axios";
 import { store } from "./store";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3002";
-const BASE_WS_URL = process.env.REACT_APP_BASE_WS_URL || "ws://localhost:3002";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://192.168.12.145:3002";
+const BASE_WS_URL = process.env.REACT_APP_BASE_WS_URL || "ws://192.168.12.145:3002";
+const S3_UPLOAD = !!process.env.REACT_APP_S3_UPLOAD || false;
+const BASE_S3_URL = process.env.REACT_APP_BASE_S3_URL || "https://tourforall.s3.amazonaws.com";
 
 /** API Class.
  *
@@ -82,7 +84,10 @@ class TourForAllAPI {
      * @param {*} url 
      */
     static getImageUrl(image) {
-        return `${BASE_URL}${image}`;
+        if (image.startsWith("http:") || image.startsWith("https:")) {
+            return image;
+        }
+        return S3_UPLOAD ? `${BASE_S3_URL}${image}` : `${BASE_URL}${image}`;
     }
 
 

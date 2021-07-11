@@ -1,4 +1,4 @@
-import { LOAD_TOUR, LOAD_TOUR_LIST, LOAD_TOUR_WIDGET, REMOVE_TOUR, RESET_TOUR_LIST } from "./types";
+import { LOAD_TOUR, LOAD_TOUR_LIST, LOAD_TOUR_WIDGET, REMOVE_TOUR, RESET_TOUR_LIST, RESET_TOUR_WIDGET } from "./types";
 import Tour from '../models/tour';
 import TourPlayer from "../models/tourPlayer";
 import { store } from "../store";
@@ -94,6 +94,7 @@ function insertTour(data, setLoading, setError) {
             if (tour) {
                 dispatch(gotTour(tour));
                 dispatch(resetTourList());
+                dispatch(resetTourWidget());
             }
         } catch (error) {
             setError && setError(error);
@@ -111,6 +112,8 @@ function updateTour(handle, data, setLoading, setError) {
             const tour = await Tour.update(handle, data);
             if (tour) {
                 dispatch(gotTour(tour));
+                dispatch(resetTourList());
+                dispatch(resetTourWidget());
             }
         } catch (error) {
             setError && setError(error);
@@ -127,6 +130,8 @@ function deleteTour(handle, setLoading, setError) {
         try {
             await Tour.remove(handle);
             dispatch(removeTour(handle));
+            dispatch(resetTourList());
+            dispatch(resetTourWidget());
         } catch (error) {
             setError && setError(error);
         }
@@ -181,8 +186,6 @@ function gotTourWidget(list, listType) {
     };
 }
 
-
-
 function removeTour(handle) {
     return {
         type: REMOVE_TOUR,
@@ -194,6 +197,12 @@ function resetTourList() {
     return {
         type: RESET_TOUR_LIST
     };
+}
+
+function resetTourWidget() {
+    return {
+        type: RESET_TOUR_WIDGET
+    }
 }
 
 export {
