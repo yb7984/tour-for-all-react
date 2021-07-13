@@ -1,5 +1,5 @@
 import { Container, Grid, makeStyles } from "@material-ui/core";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadClock, tourClockPlay, removeClock, gotClock, connectClockSocket } from "./actions/clock";
 import Loading from "./Loading";
@@ -51,6 +51,7 @@ const TourClock = ({ tour }) => {
 
     const canEdit = tour.creator === username;
     const canStart = [TOUR_STATUS_PUBLIC, TOUR_STATUS_STARTED, TOUR_STATUS_ENDED].includes(tour.status);
+    const connectTimer = useRef(null);
 
     if (clock) {
         // update the entries
@@ -62,8 +63,23 @@ const TourClock = ({ tour }) => {
         }
     }
 
-    if (canStart) {
-        dispatch(connectClockSocket(tour));         // make sure the clock is connected
+    // check every 10 seconds making sure even no rerender still connected
+    useEffect(() => {
+        connetWS();
+        connectTimer.current = setInterval(connetWS, 10000);
+
+        return () => {
+            if (connectTimer.current) {
+                clearInterval(connectTimer.current);
+            }
+        };
+        // eslint-disable-next-line
+    }, []);
+
+    function connetWS() {
+        if (canStart) {
+            dispatch(connectClockSocket(tour));         // make sure the clock is connected
+        }
     }
 
     useEffect(() => {

@@ -7,12 +7,14 @@ const INITIAL_LIST_STATE = {
     perPage: 20,
     total: 0,
     listType: "all",
-    searchString: ""
+    searchString: "",
+    reload: true
 };
 
 const INITIAL_WIDGET_STATE = {
     tours: [],
-    perPage: 0
+    perPage: 0,
+    reload: true
 }
 
 const INITIAL_STATE = {
@@ -113,7 +115,8 @@ function tours(state = INITIAL_STATE, action) {
                     ...state.widgets,
                     [action.payload.listType]: {
                         tours: action.payload.tours,
-                        perPage: action.payload.perPage
+                        perPage: action.payload.perPage,
+                        reload: false
                     }
                 }
             };

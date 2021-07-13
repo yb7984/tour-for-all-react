@@ -61,7 +61,7 @@ const TourClockTimer = ({ clock, tour }) => {
 
     function formatTime(count) {
         const days = Math.floor(count / (3600 * 24));
-        const hours = Math.floor(count / 3600);
+        const hours = Math.floor(count / 3600) % 24;
         const minutes = Math.floor(count / 60) % 60;
         const seconds = count % 60;
 

@@ -67,13 +67,13 @@ const TourListWidget = ({ listType = "public", perPage = 6 }) => {
 
     useEffect(() => {
         async function loadTour() {
-            if (widget.perPage === 0 && !error) {
+            if ((widget.perPage === 0 || widget.reload) && !loading && !error) {
                 dispatch(getTourWidget(searchParams, perPage, listType, setLoading, setError));
             }
         }
         loadTour();
         // eslint-disable-next-line
-    }, []);
+    }, [widget]);
 
     if (loading) {
         return <Loading />;
