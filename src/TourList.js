@@ -40,7 +40,7 @@ const TourList = ({ type = "public", perPage = 12 }) => {
     const [error, setError] = useState(false);
     const [errorTour, setErrorTour] = useState(false);
 
-    const { currentPage, total, tours, searchString, listType } = useSelector(st => st.tours.list[type]);
+    const { currentPage, total, tours, searchString, listType, reload } = useSelector(st => st.tours.list[type]);
     const { searchParams, search, hash, pathname } = useQueryParams();
     const newListType = useMemo(() => searchParams["listType"] || "upcoming", [searchParams]);
 
@@ -49,13 +49,13 @@ const TourList = ({ type = "public", perPage = 12 }) => {
 
     useEffect(() => {
         if (
-            (currentPage === 0 || search !== searchString || listType !== newListType) &&
+            (currentPage === 0 || search !== searchString || listType !== newListType || reload === true) &&
             !loading
         ) {
             // when seach condition change or first time here, fetch the first page data.
             dispatch(getTourList(search, searchParams, 1, perPage, newListType, type, setLoading, setError));
         }
-    }, [setLoading, setError, currentPage, perPage, searchParams, search, searchString, loading, newListType, type, listType, dispatch]);
+    }, [setLoading, setError, reload, currentPage, perPage, searchParams, search, searchString, loading, newListType, type, listType, dispatch]);
 
 
     useEffect(() => {

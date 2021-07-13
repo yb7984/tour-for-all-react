@@ -83,6 +83,7 @@ function tours(state = INITIAL_STATE, action) {
                     list: {
                         ...state.list,
                         [searchType]: {
+                            reload: false,
                             tours: action.payload.tours,
                             currentPage: 1,
                             perPage,
