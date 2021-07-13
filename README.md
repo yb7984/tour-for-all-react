@@ -61,66 +61,75 @@ Linkedin: [https://www.linkedin.com/in/sunbao-wu/](https://www.linkedin.com/in/s
   
 ## Components
 
-| Component                  | Route                            | Description                                         |
-| :------------------------- | :------------------------------- | :-------------------------------------------------- |
-| `App`                      |                                  | The main container of this whole app.               |
-| -- `Navbar`                |                                  | Navigation bar for this whole app.                  |
-| -- `Footer`                |                                  | Project introduction for this whole app.            |
-| -- `Loading`               |                                  | Component to show when loading data.                |
-| -- `ConfirmDialog`         |                                  | Component to show confirmation message.             |
-| -- `Error`                 |                                  | Component to show when something unexpected happen. |
-| -- `ImageUpload`           |                                  | Component to handle image file upload.              |
-| -- `SnackAlert`            |                                  | Component to show alert message.                    |
-| -- `UserChip`              |                                  | Component to show user avatar and na                |
-||||
-| -- `Routes`                |                                  | Component that contains all the routes.             |
-| ---- `HomePage`            | /                                | Homepage                                            |
-| ------ `TourListWidget`    |                                  | Homepage tour list component.                       |
-| ---- `Login`               | /login                           | Login page.                                         |
-| ---- `Signup`              | /signup                          | Sign up page.                                       |
-| ---- `Profile`             | /profile                         | Profile update page.                                |
-||||
-| ---- `Tours`               | /tours                           | Tour list page. default to  upcoming tours.         |
-| ------ `TourSearchForm`    |                                  | Tour search form                                    |
-| ------ `TourList`          |                                  | Tour list component                                 |
-||||
-| ---- `MyFavorites`         | /myfavorites                     | Favorite tour list page.                            |
-| ------ `TourSearchForm`    |                                  | Tour search form                                    |
-| ------ `TourList`          |                                  | Tour list component                                 |
-||||
-| ---- `MyJoined`            | /myjoined                        | Joined tour list page.                              |
-| ------ `TourSearchForm`    |                                  | Tour search form                                    |
-| ------ `TourList`          |                                  | Tour list component                                 |
-||||
-| ---- `MyTours`             | /mytours                         | My created tours page.                              |
-| ------ `TourSearchForm`    |                                  | Tour search form                                    |
-| ------ `TourList`          |                                  | Tour list component                                 |
-| -- `TourAddForm`           |                                  | Tour creating form.                                 |
-||||
-| Components in `Tour`         |||
-| -- `TourListItem`    |                                  | Tour list item component                            |
-| -- `Tour`            |                                  | Tour detail page.                                   |
-| ---- `TourDetail`    |                                  | Tour detail page.                                   |
-| ------ `TourPlayerList`    |                            | Show all the joined players.                        |
-| ------ `TourStructure`    |                             | Show the tournament structure.                      |
-| ---- `TourClock`     |                                  | Tour Clock page.                                    |
-| ------ `TourClockActions` |                             | Tour Clock control buttons.                         |
-| ------ `TourClockIndicators` |                          | Tour Clock status indicator.                        |
-| ------ `TourClockLevel` |                               | Tour Clock level indicator.                         |
-| ------ `TourClockPlayersLeft` |                         | Tour Clock remain players indicator.                |
-| ------ `TourClockTimer` |                               | Tour Clock main timer.                              |
-| ---- `TourEditForm`    |                                | Tour edit form                                      |
-| ------ `TourSettingForm` |                              | Tour setting input form                             |
-| ---- `TourCopyButton` |                                 | Tour copy button.                                   |
-| ---- `TourDeleteButton` |                               | Tour delete button.                                 |
-| ---- `TourFollowButton` |                               | Tour follow button.                                 |
-| ---- `TourJoinButton` |                                 | Tour join button.                                   |
-| ---- `TourRefreshButton` |                              | Tour refresh button.                                |
+| Component                     | Route        | Description                                         |
+| :---------------------------- | :----------- | :-------------------------------------------------- |
+| `App`                         |              | The main container of this whole app.               |
+| -- `Navbar`                   |              | Navigation bar for this whole app.                  |
+| -- `Footer`                   |              | Project introduction for this whole app.            |
+| -- `Loading`                  |              | Component to show when loading data.                |
+| -- `ConfirmDialog`            |              | Component to show confirmation message.             |
+| -- `Error`                    |              | Component to show when something unexpected happen. |
+| -- `ImageUpload`              |              | Component to handle image file upload.              |
+| -- `SnackAlert`               |              | Component to show alert message.                    |
+| -- `UserChip`                 |              | Component to show user avatar and na                |
+|                               |              |                                                     |
+| -- `Routes`                   |              | Component that contains all the routes.             |
+| ---- `HomePage`               | /            | Homepage                                            |
+| ------ `TourListWidget`       |              | Homepage tour list component.                       |
+| ---- `Login`                  | /login       | Login page.                                         |
+| ---- `Signup`                 | /signup      | Sign up page.                                       |
+| ---- `Profile`                | /profile     | Profile update page.                                |
+|                               |              |                                                     |
+| ---- `Tours`                  | /tours       | Tour list page. default to  upcoming tours.         |
+| ------ `TourSearchForm`       |              | Tour search form                                    |
+| ------ `TourList`             |              | Tour list component                                 |
+|                               |              |                                                     |
+| ---- `MyFavorites`            | /myfavorites | Favorite tour list page.                            |
+| ------ `TourSearchForm`       |              | Tour search form                                    |
+| ------ `TourList`             |              | Tour list component                                 |
+|                               |              |                                                     |
+| ---- `MyJoined`               | /myjoined    | Joined tour list page.                              |
+| ------ `TourSearchForm`       |              | Tour search form                                    |
+| ------ `TourList`             |              | Tour list component                                 |
+|                               |              |                                                     |
+| ---- `MyTours`                | /mytours     | My created tours page.                              |
+| ------ `TourSearchForm`       |              | Tour search form                                    |
+| ------ `TourList`             |              | Tour list component                                 |
+| -- `TourAddForm`              |              | Tour creating form.                                 |
+|                               |              |                                                     |
+| Components in `Tour`          |              |                                                     |
+| -- `TourListItem`             |              | Tour list item component                            |
+| -- `Tour`                     |              | Tour detail page.                                   |
+| ---- `TourDetail`             |              | Tour detail page.                                   |
+| ------ `TourPlayerList`       |              | Show all the joined players.                        |
+| ------ `TourStructure`        |              | Show the tournament structure.                      |
+| ---- `TourClock`              |              | Tour Clock page.                                    |
+| ------ `TourClockActions`     |              | Tour Clock control buttons.                         |
+| ------ `TourClockIndicators`  |              | Tour Clock status indicator.                        |
+| ------ `TourClockLevel`       |              | Tour Clock level indicator.                         |
+| ------ `TourClockPlayersLeft` |              | Tour Clock remain players indicator.                |
+| ------ `TourClockTimer`       |              | Tour Clock main timer.                              |
+| ---- `TourEditForm`           |              | Tour edit form                                      |
+| ------ `TourSettingForm`      |              | Tour setting input form                             |
+| ---- `TourCopyButton`         |              | Tour copy button.                                   |
+| ---- `TourDeleteButton`       |              | Tour delete button.                                 |
+| ---- `TourFollowButton`       |              | Tour follow button.                                 |
+| ---- `TourJoinButton`         |              | Tour join button.                                   |
+| ---- `TourRefreshButton`      |              | Tour refresh button.                                |
 
+
+## Database schema
+
+![Database schema](dataschema.png)
+
+
+## API Reference
+
+Please check it out at [tour-for-all-express](../tour-for-all-express).
 
 ## Environment Variables
 
-To build this project, you will need to update the following environment variables at package.json
+To build this frontend project, you will need to update the following environment variables at package.json
 ```json
 {
     "scripts":{
