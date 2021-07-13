@@ -12,6 +12,7 @@ import { ROLE_ADMIN } from "./models/role";
 import TourSetting from './TourSetting';
 import moment from 'moment';
 import { statusName, TOUR_STATUS_CANCELED, TOUR_STATUS_PRIVATE, TOUR_STATUS_PUBLIC } from './models/tourStatus';
+import defaultImage from "./images/pokertour1.jpeg";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -249,6 +250,7 @@ const TourEditForm = ({ tour, cancelEdit }) => {
                                     <ImageUpload
                                         uploading={uploading} setUploading={setUploading}
                                         image={formData.image} setImage={setImage}
+                                        defaultImage={defaultImage}
                                         label="Upload tournament image!" />
                                 </Grid>
                                 <Grid item xs={12}>

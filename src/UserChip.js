@@ -5,8 +5,7 @@ import { Avatar, Chip, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        fontSize: "1.5em",
-        padding: theme.spacing(1)
+        fontSize: "1.2em"
     },
 }));
 

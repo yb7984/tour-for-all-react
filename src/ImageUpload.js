@@ -1,7 +1,6 @@
 import { makeStyles, Button, Typography } from "@material-ui/core";
 import { useState } from "react";
 import TourForAllAPI from "./api";
-import defaultImage from "./images/avatar.png";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ImageUpload = ({ uploading, setUploading, image, setImage, label }) => {
+const ImageUpload = ({ uploading, setUploading, image, setImage, label, defaultImage }) => {
     const classes = useStyles();
     const [error, setError] = useState("");
 

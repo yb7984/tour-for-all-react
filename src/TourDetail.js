@@ -81,7 +81,7 @@ const TourDetail = ({ tour }) => {
                             Level:
                         </Grid>
                         <Grid item xs={8}>
-                            {tour.getSetting("defalutDuration")} Minutes
+                            {tour.getSetting("defaultDuration")} Minutes
                         </Grid>
                         <Grid item xs={4}>
                             Status:

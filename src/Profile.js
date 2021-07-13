@@ -10,6 +10,7 @@ import useFormError from './hooks/useFormError';
 import ImageUpload from './ImageUpload';
 import Error from './Error';
 import SnackAlert from './SnackAlert';
+import defaultImage from "./images/avatar.png";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -169,6 +170,7 @@ const Profile = () => {
                             <ImageUpload
                                 uploading={uploading} setUploading={setUploading}
                                 image={formData.image} setImage={setImage}
+                                defaultImage={defaultImage}
                                 label="Upload your avatar!" />
                         </Grid>
                         <Grid item xs={12}>

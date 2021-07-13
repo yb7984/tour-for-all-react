@@ -19,19 +19,27 @@ class Clock {
         obj && Object.assign(this, obj);
     }
 
+    /**
+     * Format the number to display as 2 digit
+     * @param {Integer} number 
+     * @returns 
+     */
     static formatNumber(number) {
         if (number < 10) {
-            return "0" + number;
+            return "0" + number.toString();
         }
-        return number;
+        return number.toString();
     }
 
+    /**
+     * Format the time showing on the Clock
+     */
     get showTime() {
         const hours = Math.floor(this.timeLeft / 3600);
         const minutes = Math.floor(this.timeLeft / 60) % 60;
         const seconds = this.timeLeft % 60;
         if (hours > 0) {
-            return `${Clock.formatNumber(hours)}:${Clock.formatNumber(minutes)} : ${Clock.formatNumber(seconds)}`;
+            return `${Clock.formatNumber(hours)} : ${Clock.formatNumber(minutes)} : ${Clock.formatNumber(seconds)}`;
         }
         return `${Clock.formatNumber(minutes)} : ${Clock.formatNumber(seconds)}`;
     }
@@ -60,7 +68,7 @@ class Clock {
 
         let count = 1;
         for (let i = 0; i < this.levelIndex; i++) {
-            if (this.currentLevel.levelType !== "break") {
+            if (this.levels[i].levelType !== "break") {
                 count++;
             }
         }

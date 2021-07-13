@@ -13,6 +13,7 @@ import moment from 'moment';
 import Tour from './models/tour';
 import { useHistory } from 'react-router-dom';
 import useQueryParams from './hooks/useQueryParams';
+import defaultImage from "./images/pokertour1.jpeg";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -234,6 +235,7 @@ const TourAddForm = ({ handleClose = null }) => {
                             <ImageUpload
                                 uploading={uploading} setUploading={setUploading}
                                 image={formData.image} setImage={setImage}
+                                defaultImage={defaultImage}
                                 label="Upload tournament image!" />
 
 

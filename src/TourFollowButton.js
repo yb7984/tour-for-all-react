@@ -45,7 +45,7 @@ const TourFollowButton = ({ tour }) => {
     }
 
     return (
-        <><Tooltip title={following ? "Add to Favorites" : "Remove from Favorites"}>
+        <><Tooltip title={following ? "Remove from Favorites" : "Add to Favorites"}>
             <div>
                 <IconButton onClick={handleFollow} >
                     {

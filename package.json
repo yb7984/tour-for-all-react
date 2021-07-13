@@ -4,9 +4,6 @@
   "private": true,
   "dependencies": {
     "@fontsource/roboto": "^4.4.5",
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
@@ -29,7 +26,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "REACT_APP_BASE_URL=https://tourforall.herokuapp.com REACT_APP_BASE_WS_URL=ws://tourforall.herokuapp.com REACT_APP_S3_UPLOAD=true REACT_APP_BASE_S3_URL=https://tourforall.s3.amazonaws.com react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

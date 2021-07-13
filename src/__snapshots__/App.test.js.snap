@@ -1,0 +1,879 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App can render test login 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg"
+  >
+    <header
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary MuiPaper-elevation4"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      >
+        <div
+          class="MuiBox-root MuiBox-root-57"
+        >
+          <button
+            aria-label="menu"
+            class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-42 MuiIconButton-colorInherit MuiIconButton-edgeStart"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <h6
+          class="MuiTypography-root makeStyles-title-43 MuiTypography-h6"
+        >
+          <a
+            aria-current="page"
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-titleButton-44 MuiButton-colorInherit active"
+            href="/"
+            role="button"
+            tabindex="0"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-titleIcon-45"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <svg>
+                  poker1.svg
+                </svg>
+              </svg>
+              Tour for All
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </a>
+        </h6>
+        <div
+          class="MuiBox-root MuiBox-root-58"
+        >
+          <div
+            class="makeStyles-menuHorizontal-53"
+          >
+            <ul
+              class="MuiList-root makeStyles-listHorizontal-54 MuiList-padding"
+            >
+              <a
+                aria-current="page"
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-56 MuiListItem-gutters MuiListItem-button active"
+                href="/"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Home
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-56 MuiListItem-gutters MuiListItem-button"
+                href="/tours"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Tournaments
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+            </ul>
+            <hr
+              class="MuiDivider-root"
+            />
+            <ul
+              class="MuiList-root makeStyles-listHorizontal-54 MuiList-padding"
+            >
+              <a
+                aria-current="page"
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-56 MuiListItem-gutters MuiListItem-button active"
+                href="/login"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Login
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-56 MuiListItem-gutters MuiListItem-button"
+                href="/signup"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Sign up
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden="true"
+        class="MuiBackdrop-root makeStyles-backdrop-59"
+        style="opacity: 0; visibility: hidden;"
+      >
+        <div
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </div>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthSm"
+    >
+      <form
+        class="makeStyles-root-60"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <h3
+              class="MuiTypography-root MuiTypography-h3"
+            >
+              User Login
+            </h3>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError"
+            />
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined Mui-focused Mui-focused Mui-required Mui-required"
+                data-shrink="true"
+                for="username"
+                id="username-label"
+              >
+                Username
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth Mui-focused Mui-focused MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="username"
+                  name="username"
+                  placeholder="Enter username"
+                  required=""
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-61 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-63 PrivateNotchedOutline-legendNotched-64"
+                  >
+                    <span>
+                      Username *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+                data-shrink="false"
+                for="password"
+                id="password-label"
+              >
+                Password
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="password"
+                  name="password"
+                  placeholder="Enter password"
+                  required=""
+                  type="password"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-61 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-63"
+                  >
+                    <span>
+                      Password *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              data-testid="login-button"
+              tabindex="0"
+              type="submit"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Login
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-h6"
+            >
+              No account? just 
+              <a
+                href="/signup"
+              >
+                Sign up
+              </a>
+               here.
+            </h6>
+          </div>
+        </div>
+      </form>
+      <div
+        aria-hidden="true"
+        class="MuiBackdrop-root makeStyles-backdrop-59"
+        style="opacity: 0; visibility: hidden;"
+      >
+        <div
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`App can render test signup 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg"
+  >
+    <header
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary MuiPaper-elevation4"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      >
+        <div
+          class="MuiBox-root MuiBox-root-93"
+        >
+          <button
+            aria-label="menu"
+            class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-78 MuiIconButton-colorInherit MuiIconButton-edgeStart"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <h6
+          class="MuiTypography-root makeStyles-title-79 MuiTypography-h6"
+        >
+          <a
+            aria-current="page"
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-titleButton-80 MuiButton-colorInherit active"
+            href="/"
+            role="button"
+            tabindex="0"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-titleIcon-81"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <svg>
+                  poker1.svg
+                </svg>
+              </svg>
+              Tour for All
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </a>
+        </h6>
+        <div
+          class="MuiBox-root MuiBox-root-94"
+        >
+          <div
+            class="makeStyles-menuHorizontal-89"
+          >
+            <ul
+              class="MuiList-root makeStyles-listHorizontal-90 MuiList-padding"
+            >
+              <a
+                aria-current="page"
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-92 MuiListItem-gutters MuiListItem-button active"
+                href="/"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Home
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-92 MuiListItem-gutters MuiListItem-button"
+                href="/tours"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Tournaments
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+            </ul>
+            <hr
+              class="MuiDivider-root"
+            />
+            <ul
+              class="MuiList-root makeStyles-listHorizontal-90 MuiList-padding"
+            >
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-92 MuiListItem-gutters MuiListItem-button"
+                href="/login"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Login
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+              <a
+                aria-current="page"
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-listItemHorizontal-92 MuiListItem-gutters MuiListItem-button active"
+                href="/signup"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Sign up
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden="true"
+        class="MuiBackdrop-root makeStyles-backdrop-95"
+        style="opacity: 0; visibility: hidden;"
+      >
+        <div
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </div>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthSm"
+    >
+      <form
+        class="makeStyles-root-96"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <h3
+              class="MuiTypography-root MuiTypography-h3"
+            >
+              User Sign Up
+            </h3>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined Mui-focused Mui-focused Mui-required Mui-required"
+                data-shrink="true"
+                for="username"
+                id="username-label"
+              >
+                Username
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth Mui-focused Mui-focused MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="username"
+                  maxlength="30"
+                  name="username"
+                  placeholder="Enter username"
+                  required=""
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-97 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-99 PrivateNotchedOutline-legendNotched-100"
+                  >
+                    <span>
+                      Username *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+                data-shrink="false"
+                for="password"
+                id="password-label"
+              >
+                Password
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="password"
+                  maxlength="30"
+                  minlength="5"
+                  name="password"
+                  placeholder="Enter password"
+                  required=""
+                  type="password"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-97 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-99"
+                  >
+                    <span>
+                      Password *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+                data-shrink="false"
+                for="firstName"
+                id="firstName-label"
+              >
+                First Name
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="firstName"
+                  maxlength="30"
+                  name="firstName"
+                  placeholder="Enter first name"
+                  required=""
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-97 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-99"
+                  >
+                    <span>
+                      First Name *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+                data-shrink="false"
+                for="lastName"
+                id="lastName-label"
+              >
+                Last Name
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="lastName"
+                  maxlength="30"
+                  name="lastName"
+                  placeholder="Enter last name"
+                  required=""
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-97 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-99"
+                  >
+                    <span>
+                      Last Name *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+                data-shrink="false"
+                for="email"
+                id="email-label"
+              >
+                Email
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="email"
+                  maxlength="50"
+                  name="email"
+                  placeholder="Enter email"
+                  required=""
+                  type="email"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-97 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-99"
+                  >
+                    <span>
+                      Email *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              data-testid="signup-button"
+              tabindex="0"
+              type="submit"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Sign Up
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </form>
+      <div
+        aria-hidden="true"
+        class="MuiBackdrop-root makeStyles-backdrop-95"
+        style="opacity: 0; visibility: hidden;"
+      >
+        <div
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

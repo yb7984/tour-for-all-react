@@ -41,7 +41,7 @@ const TourSetting = ({ setSetting, setting }) => {
     const form = useRef(null);
     const [open, setOpen] = useState(false);
     const defaultSetting = Object.keys(setting).length > 0 ? setting : {
-        defalutDuration: 20,
+        defaultDuration: 20,
         defaultBreakDuration: 10,
         levels: [{
             id: uuid(),
@@ -99,7 +99,7 @@ const TourSetting = ({ setSetting, setting }) => {
                 smallBlind: newData.levels[index].smallBlind,
                 ante: newData.levels[index].ante,
                 bigBlindAnte: newData.levels[index].bigBlindAnte,
-                duration: levelType === "break" ? newData.defaultBreakDuration : newData.defalutDuration
+                duration: levelType === "break" ? newData.defaultBreakDuration : newData.defaultDuration
             });
 
             return newData;
@@ -147,10 +147,10 @@ const TourSetting = ({ setSetting, setting }) => {
                 <DialogContent>
                     <Grid container>
                         <Grid item xs={6} md={4}>
-                            <TextField id="defalutDuration" name="defalutDuration" type="text"
+                            <TextField id="defaultDuration" name="defaultDuration" type="text"
                                 label="Default Level Duration" variant="outlined"
                                 required
-                                value={formData.defalutDuration}
+                                value={formData.defaultDuration}
                                 onChange={handleChange}
                                 InputLabelProps={{
                                     shrink: true,

@@ -1,5 +1,5 @@
 import TourForAllAPI from '../api';
-import defaultImage from "../images/avatar.png";
+import defaultImage from "../images/pokertour1.jpeg";
 import TourPlayer from './tourPlayer';
 import { v4 as uuid } from 'uuid';
 
@@ -66,7 +66,7 @@ class Tour {
 
         if (this.setting === "") {
             this.setting = JSON.stringify({
-                defalutDuration: 20,
+                defaultDuration: 20,
                 defaultBreakDuration: 10,
                 levels: [{
                     id: uuid(),
@@ -159,8 +159,6 @@ class Tour {
      * @returns Tour
      */
     static async insert(data) {
-        console.log(data);
-
         const res = await TourForAllAPI.request(
             `tours`,
             data,

@@ -67,5 +67,6 @@ function resetAll() {
 export {
     login,
     logout,
-    signup
+    signup,
+    resetAll
 };

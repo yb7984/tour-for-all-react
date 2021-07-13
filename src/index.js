@@ -13,6 +13,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 import theme from './theme';
 
+import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { store, persistedStore } from "./store";
@@ -24,7 +25,9 @@ ReactDOM.render(
         <PersistGate loading={<Loading open={true} />} persistor={persistedStore}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <App />
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
             </ThemeProvider>
         </PersistGate>
     </Provider>,

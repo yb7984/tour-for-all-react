@@ -135,7 +135,7 @@ const Navbar = memo(() => {
                             <ListItemAvatar className={vertical ? classes.avatarVerical : classes.avatarHorizontal}>
                                 <Avatar alt={username} src={user.imageUrl} className={classes.avatar} />
                             </ListItemAvatar>
-                            <ListItemText className={classes.avatarText}>{user.username}</ListItemText>
+                            <ListItemText className={classes.avatarText}>{user.fullName}</ListItemText>
                         </ListItem>
                         <ListItem button component={NavLink} to="/profile" className={listItem}>
                             {vertical && <ListItemIcon><AccountBoxIcon /></ListItemIcon>}
