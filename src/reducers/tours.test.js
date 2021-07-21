@@ -7,12 +7,14 @@ const INITIAL_LIST_STATE = {
     perPage: 20,
     total: 0,
     listType: "all",
-    searchString: ""
+    searchString: "",
+    reload:true
 };
 
 const INITIAL_WIDGET_STATE = {
     tours: [],
-    perPage: 0
+    perPage: 0,
+    reload:true
 }
 
 const INITIAL_STATE = {
@@ -81,11 +83,11 @@ it('should handle RESET_ALL', () => {
 
 
 it('should handle LOAD_TOUR_LIST', () => {
-    let state = reducer(undefined, {
+    let state = reducer(INITIAL_STATE, {
         type: LOAD_TOUR_LIST,
         payload: {
             listType: "upcoming",
-            type: "public",
+            searchType: "public",
             searchString: "term=test",
             page: 1,
             perPage: 1,
@@ -99,7 +101,8 @@ it('should handle LOAD_TOUR_LIST', () => {
         perPage: 1,
         total: 2,
         listType: "upcoming",
-        searchString: "term=test"
+        searchString: "term=test",
+        reload: false
     });
 
     // adding new page
@@ -107,7 +110,7 @@ it('should handle LOAD_TOUR_LIST', () => {
         type: LOAD_TOUR_LIST,
         payload: {
             listType: "upcoming",
-            type: "public",
+            searchType: "public",
             searchString: "term=test",
             page: 2,
             perPage: 1,
@@ -121,7 +124,8 @@ it('should handle LOAD_TOUR_LIST', () => {
         perPage: 1,
         total: 2,
         listType: "upcoming",
-        searchString: "term=test"
+        searchString: "term=test",
+        reload:false
     });
 
     // change listType, clear list and goback to page 1
@@ -129,7 +133,7 @@ it('should handle LOAD_TOUR_LIST', () => {
         type: LOAD_TOUR_LIST,
         payload: {
             listType: "past",
-            type: "public",
+            searchType: "public",
             searchString: "term=test",
             page: 1,
             perPage: 1,
@@ -143,14 +147,15 @@ it('should handle LOAD_TOUR_LIST', () => {
         perPage: 1,
         total: 2,
         listType: "past",
-        searchString: "term=test"
+        searchString: "term=test",
+        reload:false
     });
 });
 
 
 
 it('should handle LOAD_TOUR_WIDGET', () => {
-    let state = reducer(undefined, {
+    let state = reducer(INITIAL_STATE, {
         type: LOAD_TOUR_WIDGET,
         payload: {
             listType: "upcoming",
@@ -160,7 +165,8 @@ it('should handle LOAD_TOUR_WIDGET', () => {
     });
     expect(state.widgets["upcoming"]).toEqual({
         perPage: 1,
-        tours: [testTour]
+        tours: [testTour],
+        reload: false
     });
 });
 
