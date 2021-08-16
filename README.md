@@ -125,7 +125,7 @@ Linkedin: [https://www.linkedin.com/in/sunbao-wu/](https://www.linkedin.com/in/s
 
 ## API Reference
 
-Please check it out at [tour-for-all-express](../tour-for-all-express).
+Please check it out at [tour-for-all-express](https://github.com/yb7984/tour-for-all-express).
 
 ## Environment Variables
 
