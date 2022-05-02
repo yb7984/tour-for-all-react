@@ -1,5 +1,5 @@
 import { createTransform } from 'redux-persist';
-import User from '../models/user';
+import { User } from '../models';
 
 const SetTransform = createTransform(
     // transform state on its way to being serialized and persisted.

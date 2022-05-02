@@ -1,6 +1,5 @@
 import { LOAD_TOUR, LOAD_TOUR_LIST, LOAD_TOUR_WIDGET, REMOVE_TOUR, RESET_TOUR_LIST, RESET_TOUR_WIDGET } from "./types";
-import Tour from '../models/tour';
-import TourPlayer from "../models/tourPlayer";
+import { Tour, TourPlayer } from '../models';
 import { store } from "../store";
 
 /** Actions for tours */

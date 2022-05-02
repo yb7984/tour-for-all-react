@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import App from './App';
-import Loading from './Loading';
+import Loading from './components/common/Loading';
 
 import '@fontsource/roboto';
 

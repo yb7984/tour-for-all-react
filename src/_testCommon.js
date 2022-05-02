@@ -11,8 +11,7 @@ import theme from './theme';
 import { Provider } from "react-redux";
 import { store } from "./store";
 import '@fontsource/roboto';
-import User from './models/user';
-import Tour from './models/tour';
+import { User, Tour } from './models';
 import { ROLE_ADMIN, ROLE_USER } from './models/role';
 import { TOUR_STATUS_PUBLIC } from '../../tour-for-all-express/models/tourStatus';
 

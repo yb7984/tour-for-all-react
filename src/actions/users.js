@@ -1,5 +1,5 @@
 
-import User from '../models/user';
+import { User } from '../models';
 import { LOAD_USER } from "./types";
 
 /** Actions for users */

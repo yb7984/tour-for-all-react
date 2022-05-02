@@ -1,5 +1,5 @@
 import { createTransform } from 'redux-persist';
-import Clock from '../models/clock';
+import { Clock } from '../models';
 
 const SetTransform = createTransform(
     // transform state on its way to being serialized and persisted.
