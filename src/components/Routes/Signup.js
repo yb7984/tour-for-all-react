@@ -2,7 +2,7 @@ import { Redirect } from 'react-router-dom';
 import { Container, Typography, Grid, TextField, makeStyles } from '@material-ui/core';
 import { useFields, useFormError } from '../../hooks';
 import { Loading, SnackAlert } from '../common';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { signup } from '../../actions/auth';
 import Button from '@material-ui/core/Button';
 import { useState } from 'react';
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
  * /signup route , component to show a signup form 
  * @returns 
  */
-const Signup = () => {
+const Signup = (props) => {
     const classes = useStyles();
 
     const [formData, handleChange] = useFields({
@@ -36,8 +36,7 @@ const Signup = () => {
         lastName: "",
         email: ""
     });
-    const dispatch = useDispatch();
-    const token = useSelector(st => st.auth.token);
+    const { token, signup } = props;
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useFormError();
     const [updating, setUpdating] = useState(false);
@@ -45,7 +44,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        dispatch(signup(formData, setLoading, setErrorMsg));
+        signup(formData, setLoading, setErrorMsg);
         setUpdating(true);
     }
 
@@ -151,4 +150,14 @@ const Signup = () => {
         </Container>);
 }
 
-export default Signup;
+const mapStateToProps = (state) => ({
+    token: state.auth.token
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signup: (data, setLoading, setErrorMsg) => dispatch(signup(data, setLoading, setErrorMsg))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

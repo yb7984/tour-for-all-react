@@ -2,7 +2,7 @@ import { Redirect } from 'react-router-dom';
 import { Container, Typography, Grid, makeStyles, TextField, } from '@material-ui/core';
 import { useFields, useFormError } from '../../hooks';
 import { Loading, Error, SnackAlert, ImageUpload } from '../common';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { updateUser } from '../../actions/users';
 import Button from '@material-ui/core/Button';
 import { useState } from 'react';
@@ -27,12 +27,10 @@ const useStyles = makeStyles((theme) => ({
  * /profile route , component to show a profile update form 
  * @returns 
  */
-const Profile = () => {
+const Profile = (props) => {
     const classes = useStyles();
 
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+    const { username, user, updateUser } = props;
 
     const [formData, handleChange, setFormData] = useFields({
         password: '',
@@ -61,7 +59,7 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        dispatch(updateUser(username, { ...formData }, setLoading, setErrorMsg));
+        updateUser(username, { ...formData }, setLoading, setErrorMsg);
         setUpdating(true);
     }
 
@@ -183,4 +181,16 @@ const Profile = () => {
 
 }
 
-export default Profile;
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username]
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (username, data, setLoading, setErrorMsg) => dispatch(updateUser(username, data, setLoading, setErrorMsg))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

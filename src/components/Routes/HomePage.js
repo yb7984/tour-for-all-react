@@ -1,5 +1,5 @@
 import { TourListWidget } from "../Tour/List";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { getTour } from "../../actions/tours";
 import { useState, useEffect } from "react";
@@ -7,23 +7,20 @@ import { useQueryParams } from "../../hooks";
 import { Loading } from "../common";
 import { Tour } from "../Tour/Detail";
 
-const HomePage = () => {
-    const username = useSelector(st => st.auth.username);
+const HomePage = (props) => {
+    const { username, tours, getTour } = props
 
     const history = useHistory();
-    const dispatch = useDispatch();
     const [loadingTour, setLoadingTour] = useState(false);
     const [error, setError] = useState(false);
 
     const { hash } = useQueryParams();
     const slug = hash ? hash.substr(1) : null;
-    const tour = useSelector(st => st.tours.tours[slug]);
+    const tour = tours[slug];
 
     useEffect(() => {
-        if (slug && !tour) {
-            dispatch(getTour(slug, setLoadingTour, setError));
-        }
-    }, [dispatch, slug, tour]);
+        getTour(slug, tour, setLoadingTour, setError);
+    }, [slug, tour, getTour]);
 
 
     const handleClose = () => {
@@ -46,4 +43,19 @@ const HomePage = () => {
     </div>);
 }
 
-export default HomePage;
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    tours: state.tours
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTour: (slug, tour, setLoading, setError) => {
+            if (slug && !tour) {
+                dispatch(getTour(slug, setLoading, setError));
+            }
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
