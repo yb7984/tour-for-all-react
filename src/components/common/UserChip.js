@@ -1,5 +1,5 @@
 import { memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { getUser } from "../../actions/users";
 import { Avatar, Chip, makeStyles } from "@material-ui/core";
 
@@ -9,16 +9,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const UserChip = memo(({ username, color = "primary", showName = true }) => {
+const UserChip = memo((props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const user = useSelector(st => st.users[username]);
+
+    const { user, getUser, color, showName } = props;
 
     useEffect(() => {
-        if (!user) {
-            dispatch(getUser(username));
-        }
-    }, [user, username, dispatch]);
+        getUser(user);
+    }, [user, getUser]);
 
     if (user) {
         return (
@@ -29,4 +27,24 @@ const UserChip = memo(({ username, color = "primary", showName = true }) => {
     return null;
 });
 
-export default UserChip;
+UserChip.defaultProps = {
+    username: null,
+    color: "primary",
+    showName: true
+};
+
+const mapStateToProps = (state, ownProps) => ({
+    user: state.users[ownProps.username]
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getUser: (user) => {
+            if (!user) {
+                dispatch(getUser(ownProps.username));
+            }
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserChip);
