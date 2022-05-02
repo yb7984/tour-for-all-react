@@ -3,8 +3,8 @@ import { makeStyles, Backdrop } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
-        color: "#FF0000",
-        fontSize:"3em"
+        color: theme.palette.error.main,
+        fontSize: "3em"
     },
 }));
 

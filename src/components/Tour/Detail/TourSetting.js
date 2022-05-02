@@ -23,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
     },
     blue: {
         color: theme.palette.primary.contrastText,
-        backgroundColor: "#0000ff",
+        backgroundColor: theme.palette.background.blue,
         width: "25px",
         height: "25px"
     },
     red: {
         color: theme.palette.primary.contrastText,
-        backgroundColor: "#ff0000",
+        backgroundColor: theme.palette.background.red,
         width: "25px",
         height: "25px"
     },
