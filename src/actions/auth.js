@@ -1,4 +1,4 @@
-import User from "../models/user";
+import { User } from "../models";
 import { AUTH_SET_TOKEN, RESET_ALL } from "../actions/types";
 import { clearClockSockets } from "./clock";
 

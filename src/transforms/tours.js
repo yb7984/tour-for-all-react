@@ -1,5 +1,5 @@
 import { createTransform } from 'redux-persist';
-import Tour from '../models/tour';
+import { Tour } from '../models';
 
 const SetTransform = createTransform(
     // transform state on its way to being serialized and persisted.

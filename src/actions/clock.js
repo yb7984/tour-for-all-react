@@ -1,5 +1,5 @@
 import { LOAD_CLOCK, REMOVE_CLOCK } from "../actions/types";
-import Clock from "../models/clock";
+import { Clock } from "../models";
 import { TOUR_STATUS_ENDED, TOUR_STATUS_PUBLIC, TOUR_STATUS_STARTED } from "../models/tourStatus";
 import { getTour, updateTour } from "./tours";
 import { store } from "../store";

@@ -1,8 +1,8 @@
 import './App.css';
-import Navbar from './Navbar';
-import Routes from './Routes';
+import Navbar from './components/Navbar';
+import Routes from './components/Routes';
 import { Container } from '@material-ui/core';
-import Footer from './Footer';
+import Footer from './components/Footer';
 
 function App() {
     return (
