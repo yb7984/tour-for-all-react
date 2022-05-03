@@ -3,7 +3,7 @@ import {
     IconButton, makeStyles, Dialog, DialogActions, DialogContent, Button,
     Grid, TextField, Typography, Tooltip
 } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { useState } from 'react';
 import { SnackAlert } from '../../common';
 import moment from 'moment';
@@ -36,12 +36,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TourCopyButton = ({ tour }) => {
+const TourCopyButton = (props) => {
     const classes = useStyles();
     const { search } = useQueryParams();
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+    
+    const {
+        tour, 
+        username, user, 
+        insertTour
+    } = props;
+
     const [slug, setSlug] = useState('');
     const history = useHistory();
     const canEdit = username && user;
@@ -87,7 +91,7 @@ const TourCopyButton = ({ tour }) => {
         data.setting = JSON.stringify(data.setting);
         data.start = moment(`${startDate} ${startTime}`, "YYYY-MM-DD HH:mm").format();
 
-        dispatch(insertTour(data, setLoading, setErrorMsg));
+        insertTour(data, setLoading, setErrorMsg);
         setUpdating(true);
     }
 
@@ -198,4 +202,15 @@ const TourCopyButton = ({ tour }) => {
     </>);
 }
 
-export default TourCopyButton;
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username]
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        insertTour: (data, setLoading, setErrorMsg) => dispatch(insertTour(data, setLoading, setErrorMsg)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourCopyButton);

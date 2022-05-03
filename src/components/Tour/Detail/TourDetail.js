@@ -1,5 +1,5 @@
 import { makeStyles, Grid, Container, TextField } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { formatDateTime } from "../../../helpers/date";
 import { TOUR_STATUS_PRIVATE } from "../../../models/tourStatus";
 import { TourPlayerList, TourStructure } from "../Detail";
@@ -35,10 +35,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TourDetail = ({ tour }) => {
+const TourDetail = (props) => {
     const classes = useStyles();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+
+
+    const {
+        tour, user
+    } = props;
 
     return (
         <Container className={classes.root}>
@@ -113,4 +116,9 @@ const TourDetail = ({ tour }) => {
     );
 };
 
-export default TourDetail;
+
+const mapStateToProps = (state) => ({
+    user: state.users[state.auth.username]
+});
+
+export default connect(mapStateToProps)(TourDetail);

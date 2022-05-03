@@ -1,7 +1,7 @@
 import { IconButton, makeStyles, CircularProgress, Tooltip } from '@material-ui/core';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import StarIcon from '@material-ui/icons/Star';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { followTour } from '../../../actions/users';
 import { SnackAlert } from "../../common";
 import { useState } from 'react';
@@ -14,11 +14,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /** Button for add to favorite and remove from favorite */
-const TourFollowButton = ({ tour }) => {
+const TourFollowButton = (props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+
+    const {
+        tour,
+        username, user,
+        followTour
+    } = props;
+
+
     const following = user && user.followingTours.includes(tour.id);
 
 
@@ -29,7 +34,7 @@ const TourFollowButton = ({ tour }) => {
 
     const handleFollow = () => {
         setUpdating(true);
-        dispatch(followTour(username, tour.id, !following, setLoading, setError));
+        followTour(username, following, setLoading, setError);
     }
 
     const handleAlertClose = (event, reason) => {
@@ -72,4 +77,16 @@ const TourFollowButton = ({ tour }) => {
     );
 }
 
-export default TourFollowButton;
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username]
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        followTour: (username, following, setLoading, setError) => dispatch(followTour(username, ownProps.tour.id, !following, setLoading, setError)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourFollowButton);

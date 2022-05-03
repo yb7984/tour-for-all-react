@@ -1,6 +1,6 @@
 import { Card, CardHeader, Avatar, makeStyles, CardContent, Typography, Chip, Tooltip } from "@material-ui/core";
 import { memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { getUser } from "../../../actions/users";
 import { Link } from "react-router-dom";
 import { useQueryParams } from "../../../hooks";
@@ -47,18 +47,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const TourListItem = memo(({ tour }) => {
+const TourListItem = memo((props) => {
 
     const classes = useStyles();
     const { search } = useQueryParams();
-    const user = useSelector(st => st.users[tour.creator]);
-    const dispatch = useDispatch();
+
+    const { tour, creator, getUser } = props;
 
     useEffect(() => {
-        if (!user) {
-            dispatch(getUser(tour.creator));
+        if (!creator) {
+            getUser(tour.creator);
         }
-    }, [tour, dispatch, user]);
+    }, [tour, creator, getUser]);
 
     return (
 
@@ -96,4 +96,14 @@ const TourListItem = memo(({ tour }) => {
     );
 });
 
-export default TourListItem;
+const mapStateToProps = (state, ownProps) => ({
+    creator: state.users[ownProps.tour.creator],
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getUser: (username) => dispatch(getUser(username)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourListItem);

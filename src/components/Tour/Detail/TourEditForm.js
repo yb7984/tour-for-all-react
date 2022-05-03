@@ -1,6 +1,6 @@
 import { Container, Typography, Grid, makeStyles, TextField, Button, MenuItem } from '@material-ui/core';
 import { Loading, ImageUpload, Error, SnackAlert } from '../../common';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { updateTour } from '../../../actions/tours';
 import { useState } from 'react';
 import { useFields, useFormError } from '../../../hooks';
@@ -27,12 +27,14 @@ const useStyles = makeStyles((theme) => ({
         }
     },
 }));
-const TourEditForm = ({ tour, cancelEdit }) => {
+const TourEditForm = (props) => {
     const classes = useStyles();
 
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+    const {
+        tour, cancelEdit,
+        username, user,
+        updateTour
+    } = props;
 
     const canEdit = username && user && (user.role === ROLE_ADMIN || username === tour.creator);
 
@@ -80,7 +82,7 @@ const TourEditForm = ({ tour, cancelEdit }) => {
         data.setting = JSON.stringify(data.setting);
         data.start = moment(`${startDate} ${startTime}`, "YYYY-MM-DD HH:mm").format();
 
-        dispatch(updateTour(tour.id, data, setLoading, setErrorMsg));
+        updateTour(data, setLoading, setErrorMsg);
         setUpdating(true);
     }
 
@@ -281,4 +283,17 @@ const TourEditForm = ({ tour, cancelEdit }) => {
     }
     return <Error />
 }
-export default TourEditForm;
+
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username]
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        updateTour: (data, setLoading, setErrorMsg) => dispatch(updateTour(ownProps.tour.id, data, setLoading, setErrorMsg)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourEditForm);

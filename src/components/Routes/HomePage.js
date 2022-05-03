@@ -45,7 +45,7 @@ const HomePage = (props) => {
 
 const mapStateToProps = (state) => ({
     username: state.auth.username,
-    tours: state.tours
+    tours: state.tours.tours
 });
 
 const mapDispatchToProps = (dispatch) => {

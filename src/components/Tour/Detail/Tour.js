@@ -1,7 +1,7 @@
 import { Dialog, IconButton, makeStyles, Tooltip, Grid } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { getUser } from "../../../actions/users";
 import { ROLE_ADMIN } from "../../../models/role";
 import EditIcon from '@material-ui/icons/Edit';
@@ -37,14 +37,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Tour = ({ tour, handleClose = null }) => {
+const Tour = (props) => {
     const classes = useStyles();
 
-    const dispatch = useDispatch();
+    const {
+        tour, handleClose,
+        username, user, creator,
+        getUser
+    } = props;
+
     const history = useHistory();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
-    const creator = useSelector(st => st.users[tour.creator]);
+
     const [edit, setEdit] = useState(false);
     const [clock, setClock] = useState(false);
 
@@ -57,9 +60,9 @@ const Tour = ({ tour, handleClose = null }) => {
 
     useEffect(() => {
         if (!creator) {
-            dispatch(getUser(tour.creator));
+            getUser(tour.creator);
         }
-    }, [tour, dispatch, creator]);
+    }, [tour, creator, getUser]);
 
 
     // toggle edit mode
@@ -133,4 +136,17 @@ const Tour = ({ tour, handleClose = null }) => {
     );
 };
 
-export default Tour;
+
+const mapStateToProps = (state, ownProps) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username],
+    creator: state.users[ownProps.tour.creator],
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getUser: (username) => dispatch(getUser(username)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tour);

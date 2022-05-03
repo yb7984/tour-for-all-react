@@ -1,5 +1,5 @@
 import { IconButton, makeStyles, CircularProgress, Tooltip } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { useState } from 'react';
 import SyncIcon from '@material-ui/icons/Sync';
 import { getTour } from '../../../actions/tours';
@@ -10,14 +10,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TourRefreshButton = ({ tour }) => {
+const TourRefreshButton = (props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+
+    const { getTour } = props;
 
     const [loading, setLoading] = useState(false);
 
     const handleClick = () => {
-        dispatch(getTour(tour.id, setLoading));
+        getTour(setLoading);
     };
 
     return (<Tooltip title="Refresh">
@@ -32,4 +33,15 @@ const TourRefreshButton = ({ tour }) => {
     </Tooltip>);
 }
 
-export default TourRefreshButton;
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getTour: (setLoading) => dispatch(getTour(ownProps.tour.id, setLoading)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourRefreshButton);

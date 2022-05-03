@@ -33,13 +33,13 @@ const useStyles = makeStyles((theme) => ({
 const TourClockTimer = ({ clock, tour }) => {
     const classes = useStyles();
 
-    const [count, setCount] = useState(Math.floor((tour.start.getTime() - Date.now()) / 1000));
+    const [count, setCount] = useState(tour.start.getTime() > Date.now() ? Math.floor((tour.start.getTime() - Date.now()) / 1000) : 0);
 
     const timer = useRef(null);
 
     useEffect(() => {
         if (tour.status === TOUR_STATUS_PUBLIC) {
-            if (!timer.current) {
+            if (!timer.current && count > 0) {
                 timer.current = setInterval(() => {
                     setCount(count => {
 
@@ -56,7 +56,7 @@ const TourClockTimer = ({ clock, tour }) => {
                 clearInterval(timer.current);
             }
         }
-    }, [tour.status])
+    }, [tour.status, count])
 
 
     function formatTime(count) {

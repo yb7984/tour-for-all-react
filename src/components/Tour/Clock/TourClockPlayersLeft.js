@@ -2,7 +2,7 @@ import { makeStyles, Typography, IconButton } from "@material-ui/core";
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import { memo } from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { tourClockAddPlayer, tourClockRemovePlayer } from "../../../actions/clock";
 import { TOUR_STATUS_STARTED } from "../../../models/tourStatus";
 
@@ -29,16 +29,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const TourClockPlayersLeft = memo(({ clock, tour, canEdit }) => {
+const TourClockPlayersLeft = memo((props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+
+    const { clock, tour, canEdit, tourClockAddPlayer, tourClockRemovePlayer } = props;
+
     const started = tour.status === TOUR_STATUS_STARTED;
 
     const handleAddPlayer = () => {
-        dispatch(tourClockAddPlayer(tour, clock, canEdit));
+        tourClockAddPlayer();
     }
     const handleRemovePlayer = () => {
-        dispatch(tourClockRemovePlayer(tour, clock, canEdit));
+        tourClockRemovePlayer();
     }
 
     return (<div className={classes.root}>
@@ -54,4 +56,11 @@ const TourClockPlayersLeft = memo(({ clock, tour, canEdit }) => {
 });
 
 
-export default TourClockPlayersLeft;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        tourClockAddPlayer: () => dispatch(tourClockAddPlayer(ownProps.tour, ownProps.clock, ownProps.canEdit)),
+        tourClockRemovePlayer: () => dispatch(tourClockRemovePlayer(ownProps.tour, ownProps.clock, ownProps.canEdit)),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(TourClockPlayersLeft);
