@@ -1,6 +1,6 @@
 import { Grid, Button, makeStyles } from "@material-ui/core"
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { TourListItem } from "../../Tour/List";
 import { Loading } from '../../common';
 import { getTourWidget } from "../../../actions/tours";
@@ -21,15 +21,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TourListWidget = ({ listType = "public", perPage = 6 }) => {
+const TourListWidget = (props) => {
     const classes = useStyles();
 
-    const dispatch = useDispatch();
-    const widget = useSelector(st => st.tours.widgets[listType]);
+    const { listType, perPage, widgets, username, getTourWidget } = props;
+
+    const widget = widgets[listType];
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const searchParams = {};
-    const username = useSelector(st => st.auth.username);
+
     let title = "";
 
     switch (listType) {
@@ -68,12 +69,12 @@ const TourListWidget = ({ listType = "public", perPage = 6 }) => {
     useEffect(() => {
         async function loadTour() {
             if ((widget.perPage === 0 || widget.reload) && !loading && !error) {
-                dispatch(getTourWidget(searchParams, perPage, listType, setLoading, setError));
+                getTourWidget(searchParams, perPage, listType, setLoading, setError);
             }
         }
         loadTour();
         // eslint-disable-next-line
-    }, [widget]);
+    }, [widget, getTourWidget]);
 
     if (loading) {
         return <Loading />;
@@ -105,4 +106,18 @@ const TourListWidget = ({ listType = "public", perPage = 6 }) => {
     );
 }
 
-export default TourListWidget;
+
+TourListWidget.defaultProps = { listType: "public", perPage: 6 };
+
+const mapStateToProps = (state) => ({
+    widgets: state.tours.widgets,
+    detailTours: state.tours.tours,
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTourWidget: (searchParams, perPage, listType, setLoading, setError) => dispatch(getTourWidget(searchParams, perPage, listType, setLoading, setError)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourListWidget);

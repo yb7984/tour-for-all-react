@@ -1,10 +1,10 @@
 import { Container } from "@material-ui/core";
 import { TourList, TourSearchForm } from "../Tour/List";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Redirect } from "react-router";
 
-const MyTours = () => {
-    const username = useSelector(st => st.auth.username);
+const MyTours = (props) => {
+    const { username } = props;
 
     if (!username) {
         return <Redirect to="/login" />;
@@ -17,4 +17,9 @@ const MyTours = () => {
     );
 }
 
-export default MyTours;
+const mapStateToProps = (state) => ({
+    username: state.auth.username
+});
+
+
+export default connect(mapStateToProps)(MyTours);

@@ -2,7 +2,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { Container, Typography, Grid, TextField, makeStyles } from '@material-ui/core';
 import { useFields, useFormError } from '../../hooks';
 import { Loading } from '../common';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
 import Button from '@material-ui/core/Button';
 import { useState } from 'react';
@@ -27,22 +27,21 @@ const useStyles = makeStyles((theme) => ({
  * /login route , component to show a login form 
  * @returns 
  */
-const Login = () => {
+const Login = (props) => {
     const classes = useStyles();
 
     const [formData, handleChange] = useFields({
         username: "",
         password: ""
     });
-    const dispatch = useDispatch();
-    const token = useSelector(st => st.auth.token);
+    const { token, login } = props;
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useFormError();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        dispatch(login(formData.username, formData.password, setLoading, setErrorMsg));
+        login(formData.username, formData.password, setLoading, setErrorMsg);
     }
 
     if (token && !loading) {
@@ -101,4 +100,14 @@ const Login = () => {
     );
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    token: state.auth.token
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (username, password, setLoading, setError) => dispatch(login(username, password, setLoading, setError))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

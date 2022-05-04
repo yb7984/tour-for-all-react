@@ -1,6 +1,6 @@
 import { Dialog, AppBar, Toolbar, Container, Typography, IconButton, Grid, makeStyles, TextField, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { insertTour } from '../../../actions/tours';
 import { useState } from 'react';
 import { useFields, useFormError } from '../../../hooks';
@@ -31,12 +31,17 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
     },
 }));
-const TourAddForm = ({ handleClose = null }) => {
+const TourAddForm = (props) => {
     const classes = useStyles();
     const { search } = useQueryParams();
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+
+    const {
+        handleClose,
+        username, user,
+        insertTour
+    } = props;
+
+
     const [slug, setSlug] = useState('');
     const history = useHistory();
 
@@ -81,7 +86,7 @@ const TourAddForm = ({ handleClose = null }) => {
         data.setting = JSON.stringify(data.setting);
         data.start = moment(`${startDate} ${startTime}`, "YYYY-MM-DD HH:mm").format();
 
-        dispatch(insertTour(data, setLoading, setErrorMsg));
+        insertTour(data, setLoading, setErrorMsg);
         setUpdating(true);
     }
 
@@ -262,4 +267,17 @@ const TourAddForm = ({ handleClose = null }) => {
         </Dialog>
     );
 }
-export default TourAddForm;
+
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username]
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        insertTour: (data, setLoading, setErrorMsg) => dispatch(insertTour(data, setLoading, setErrorMsg)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourAddForm);

@@ -1,6 +1,6 @@
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { loadClock, tourClockPlay, removeClock, gotClock, connectClockSocket } from "../../../actions/clock";
 import { Loading } from "../../common";
 import { TOUR_STATUS_ENDED, TOUR_STATUS_PUBLIC, TOUR_STATUS_STARTED } from "../../../models/tourStatus";
@@ -36,12 +36,11 @@ const useStyles = makeStyles((theme) => ({
         }
     }
 }));
-const TourClock = ({ tour }) => {
+const TourClock = (props) => {
     const classes = useStyles();
 
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
-    const clock = useSelector(st => st.clocks[tour.id]);
+    const { username, tour, clock, updateEntries, loadClock, removeClock, tourClockPlay, connectClockSocket } = props;
+
     const currentLevel = clock && clock.currentLevel;
     const nextLevel = clock && clock.nextLevel;
 
@@ -49,15 +48,7 @@ const TourClock = ({ tour }) => {
     const canStart = [TOUR_STATUS_PUBLIC, TOUR_STATUS_STARTED, TOUR_STATUS_ENDED].includes(tour.status);
     const connectTimer = useRef(null);
 
-    if (clock) {
-        // update the entries
-        if (clock.entries !== Object.keys(tour.players).length) {
-            dispatch(gotClock(new Clock({
-                ...clock,
-                entries: Object.keys(tour.players).length
-            })));
-        }
-    }
+    updateEntries(clock, tour);
 
     // check every 10 seconds making sure even no rerender still connected
     useEffect(() => {
@@ -74,26 +65,26 @@ const TourClock = ({ tour }) => {
 
     function connetWS() {
         if (canStart) {
-            dispatch(connectClockSocket(tour));         // make sure the clock is connected
+            connectClockSocket(tour);         // make sure the clock is connected
         }
     }
 
     useEffect(() => {
         if (!clock) {
             //load the clock if not ready
-            dispatch(loadClock(tour));
+            loadClock(tour);
         }
 
         if (!canEdit) {
             // if not clock manager, remove the clock from redux when close the window
             return () => {
-                dispatch(removeClock(tour));
+                removeClock(tour);
             }
         }
 
         //make sure the clock remain running even after reload
         if (clock && clock.playing === true) {
-            dispatch(tourClockPlay(tour, clock, canEdit));
+            tourClockPlay(tour, clock, canEdit);
         }
         // eslint-disable-next-line
     }, []);         // only execute once
@@ -134,4 +125,30 @@ const TourClock = ({ tour }) => {
     return <Loading />;
 }
 
-export default TourClock;
+
+const mapStateToProps = (state, ownProps) => ({
+    username: state.auth.username,
+    clock: state.clocks[ownProps.tour.id],
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateEntries: (clock, tour) => {
+            if (clock) {
+                // update the entries
+                if (clock.entries !== Object.keys(tour.players).length) {
+                    dispatch(gotClock(new Clock({
+                        ...clock,
+                        entries: Object.keys(tour.players).length
+                    })));
+                }
+            }
+        },
+        loadClock: (tour) => dispatch(loadClock(tour)),
+        removeClock: (tour) => dispatch(removeClock(tour)),
+        connectClockSocket: (tour) => dispatch(connectClockSocket(tour)),
+        tourClockPlay: (tour, clock, canEdit) => dispatch(tourClockPlay(tour, clock, canEdit)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourClock);

@@ -1,5 +1,5 @@
 import { IconButton, makeStyles, Tooltip } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useState } from 'react';
 import { TOUR_STATUS_CANCELED, TOUR_STATUS_PRIVATE, TOUR_STATUS_PUBLIC } from '../../../models/tourStatus';
@@ -17,12 +17,18 @@ const useStyles = makeStyles((theme) => ({
 
 /** Button for deleting a tournament */
 
-const TourDeleteButton = ({ tour }) => {
+const TourDeleteButton = (props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+
     const history = useHistory();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+
+
+    const {
+        tour,
+        username, user,
+        deleteTour
+    } = props;
+
     const [deleteConfirm, setDeleteConfirm] = useState(false);
 
     const { pathname, search } = useQueryParams();
@@ -41,7 +47,7 @@ const TourDeleteButton = ({ tour }) => {
     const handleDeleteConfirm = (confirm) => {
         setDeleteConfirm(false);
         if (confirm === true) {
-            dispatch(deleteTour(tour.slug));
+            deleteTour();
         }
     }
 
@@ -66,4 +72,15 @@ const TourDeleteButton = ({ tour }) => {
     );
 }
 
-export default TourDeleteButton;
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username]
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        deleteTour: () => dispatch(deleteTour(ownProps.tour.slug)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourDeleteButton);

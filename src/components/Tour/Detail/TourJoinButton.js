@@ -2,7 +2,7 @@ import { IconButton, makeStyles, CircularProgress, Chip, Tooltip } from '@materi
 import MoneyIcon from '@material-ui/icons/Money';
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { joinTour } from '../../../actions/tours';
 import { TOUR_STATUS_CANCELED, TOUR_STATUS_ENDED, TOUR_STATUS_PRIVATE } from '../../../models/tourStatus';
 import { SnackAlert } from "../../common";
@@ -16,10 +16,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TourJoinButton = ({ tour }) => {
+const TourJoinButton = (props) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
+
+    const {
+        tour,
+        username,
+        joinTour
+    } = props;
+
+
     const bought = Object.keys(tour.players).includes(username);
 
     const [loading, setLoading] = useState(false);
@@ -32,7 +38,7 @@ const TourJoinButton = ({ tour }) => {
             return;
         }
         setUpdating(true);
-        dispatch(joinTour(tour.id, username, !bought, setLoading, setError));
+        joinTour(username, bought, setLoading, setError);
     }
 
 
@@ -70,4 +76,16 @@ const TourJoinButton = ({ tour }) => {
         </>
     );
 }
-export default TourJoinButton;
+
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        joinTour: (username, bought, setLoading, setError) => dispatch(joinTour(ownProps.tour.id, username, !bought, setLoading, setError)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourJoinButton);

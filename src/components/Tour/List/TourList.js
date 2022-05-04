@@ -1,6 +1,6 @@
 import { Grid, Button, makeStyles } from "@material-ui/core"
 import { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { getTour, getTourList } from "../../../actions/tours";
 import { useQueryParams } from "../../../hooks";
@@ -27,10 +27,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TourList = ({ type = "public", perPage = 12 }) => {
+const TourList = (props) => {
     const classes = useStyles();
-
-    const dispatch = useDispatch();
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
@@ -38,12 +36,14 @@ const TourList = ({ type = "public", perPage = 12 }) => {
     const [error, setError] = useState(false);
     const [errorTour, setErrorTour] = useState(false);
 
-    const { currentPage, total, tours, searchString, listType, reload } = useSelector(st => st.tours.list[type]);
+    const { perPage, type, tourLists, detailTours, getTour, getTourList } = props;
+
+    const { currentPage, total, tours, searchString, listType, reload } = tourLists[type];
     const { searchParams, search, hash, pathname } = useQueryParams();
     const newListType = useMemo(() => searchParams["listType"] || "upcoming", [searchParams]);
 
     const slug = hash ? hash.substr(1) : null;          // if got the hash value, would open the tournament detail page
-    const tour = useSelector(st => st.tours.tours[slug]);       // 
+    const tour = detailTours[slug];       // 
 
     useEffect(() => {
         if (
@@ -51,17 +51,17 @@ const TourList = ({ type = "public", perPage = 12 }) => {
             !loading
         ) {
             // when seach condition change or first time here, fetch the first page data.
-            dispatch(getTourList(search, searchParams, 1, perPage, newListType, type, setLoading, setError));
+            getTourList(search, searchParams, 1, perPage, newListType, type, setLoading, setError);
         }
-    }, [setLoading, setError, reload, currentPage, perPage, searchParams, search, searchString, loading, newListType, type, listType, dispatch]);
+    }, [setLoading, setError, reload, currentPage, perPage, searchParams, search, searchString, loading, newListType, type, listType, getTourList]);
 
 
     useEffect(() => {
         if (slug && slug !== "new" && !tour) {
             // when get slug and the slug is not new, fetch the tour detail
-            dispatch(getTour(slug, setLoadingTour, setErrorTour));
+            getTour(slug, setLoadingTour, setErrorTour);
         }
-    }, [dispatch, slug, tour]);
+    }, [slug, tour, getTour]);
 
     // has more pages after
     const hasMore = total > currentPage * perPage;
@@ -69,7 +69,7 @@ const TourList = ({ type = "public", perPage = 12 }) => {
     // call when loadmore button click
     const handleLoadMore = () => {
         if (hasMore) {
-            dispatch(getTourList(search, searchParams, currentPage + 1, perPage, newListType, type, setLoading, setError));
+            getTourList(search, searchParams, currentPage + 1, perPage, newListType, type, setLoading, setError);
         }
     };
 
@@ -131,4 +131,18 @@ const TourList = ({ type = "public", perPage = 12 }) => {
     );
 }
 
-export default TourList;
+TourList.defaultProps = { type: "public", perPage: 12 };
+
+const mapStateToProps = (state) => ({
+    tourLists: state.tours.list,
+    detailTours: state.tours.tours,
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTour: (slug, setLoading, setError) => dispatch(getTour(slug, setLoading, setError)),
+        getTourList: (search, searchParams, page, perPage, newListType, type, setLoading, setError) => dispatch(getTourList(search, searchParams, page, perPage, newListType, type, setLoading, setError)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourList);

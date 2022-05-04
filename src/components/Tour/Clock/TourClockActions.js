@@ -1,5 +1,5 @@
 import { makeStyles, IconButton } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import {
     tourClockForward, tourClockPause, tourClockPlay, tourClockRewind, tourClockSkipNext, tourClockSkipPrevious, tourClockStop
 } from "../../../actions/clock";
@@ -35,11 +35,15 @@ const useStyles = makeStyles((theme) => ({
         }
     }
 }));
-const TourClockActions = memo(({ clock, tour }) => {
+const TourClockActions = memo((props) => {
     const classes = useStyles();
 
-    const dispatch = useDispatch();
-    const username = useSelector(st => st.auth.username);
+    const {
+        clock, tour, username,
+        tourClockSkipPrevious, tourClockRewind, tourClockPlay, tourClockPause,
+        tourClockSkipNext, tourClockForward, tourClockStop
+    } = props;
+
     const started = tour.status === TOUR_STATUS_STARTED;
 
     const canEdit = tour.creator === username;
@@ -50,16 +54,16 @@ const TourClockActions = memo(({ clock, tour }) => {
 
 
     const handleSkipPrevious = () => {
-        dispatch(tourClockSkipPrevious(tour, clock, canEdit));
+        tourClockSkipPrevious(canEdit);
     }
     const handleRewind = () => {
-        dispatch(tourClockRewind(tour, clock, canEdit));
+        tourClockRewind(canEdit);
     }
     const handlePlay = () => {
-        dispatch(tourClockPlay(tour, clock, canEdit));
+        tourClockPlay(canEdit);
     }
     const handlePause = () => {
-        dispatch(tourClockPause(tour, clock, canEdit));
+        tourClockPause(tour, clock, canEdit);
     }
     const handleStop = () => {
         setStopConfirm(true);
@@ -68,14 +72,14 @@ const TourClockActions = memo(({ clock, tour }) => {
         setStopConfirm(false);
 
         if (confirm === true) {
-            dispatch(tourClockStop(tour, clock, canEdit));
+            tourClockStop(canEdit);
         }
     }
     const handleForward = () => {
-        dispatch(tourClockForward(tour, clock, canEdit));
+        tourClockForward(canEdit);
     }
     const handleSkipNext = () => {
-        dispatch(tourClockSkipNext(tour, clock, canEdit));
+        tourClockSkipNext(canEdit);
     }
 
     return (
@@ -104,4 +108,21 @@ const TourClockActions = memo(({ clock, tour }) => {
         </div>);
 });
 
-export default TourClockActions;
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        tourClockSkipPrevious: (canEdit) => dispatch(tourClockSkipPrevious(ownProps.tour, ownProps.clock, canEdit)),
+        tourClockRewind: (canEdit) => dispatch(tourClockRewind(ownProps.tour, ownProps.clock, canEdit)),
+        tourClockPlay: (canEdit) => dispatch(tourClockPlay(ownProps.tour, ownProps.clock, canEdit)),
+        tourClockPause: (canEdit) => dispatch(tourClockPause(ownProps.tour, ownProps.clock, canEdit)),
+        tourClockStop: (canEdit) => dispatch(tourClockStop(ownProps.tour, ownProps.clock, canEdit)),
+        tourClockForward: (canEdit) => dispatch(tourClockForward(ownProps.tour, ownProps.clock, canEdit)),
+        tourClockSkipNext: (canEdit) => dispatch(tourClockSkipNext(ownProps.tour, ownProps.clock, canEdit)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourClockActions);

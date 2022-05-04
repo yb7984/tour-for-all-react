@@ -4,7 +4,7 @@ import {
     Drawer, List, ListItem, ListItemText, Divider, ListItemAvatar, ListItemIcon
 } from "@material-ui/core";
 import { NavLink, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { logout } from "../actions/auth";
 import { memo, useEffect, useState } from "react";
 import { ReactComponent as PokerIcon } from '../images/poker1.svg';
@@ -74,23 +74,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Navbar = memo(() => {
+const Navbar = memo((props) => {
 
     const classes = useStyles();
-    const dispatch = useDispatch();
     const history = useHistory();
-    const username = useSelector(st => st.auth.username);
-    const user = useSelector(st => st.users[username]);
+
+    const { username, user, getUser, logout } = props;
 
     const [menuOpen, setMenuOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        if (username && !user) {
-            dispatch(getUser(username, setLoading, setError));
-        }
-    }, [username, dispatch, user]);
+        getUser(username, user, setLoading, setError);
+    }, [username, user, getUser]);
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' &&
@@ -104,7 +101,7 @@ const Navbar = memo(() => {
     const handleLogout = (e) => {
         e.preventDefault();
 
-        dispatch(logout());
+        logout();
 
         history.push("/login");
     }
@@ -217,4 +214,21 @@ const Navbar = memo(() => {
     );
 });
 
-export default Navbar;
+
+const mapStateToProps = (state) => ({
+    username: state.auth.username,
+    user: state.users[state.auth.username]
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getUser: (username, user, setLoading, setError) => {
+            if (username && !user) {
+                dispatch(getUser(username, setLoading, setError));
+            }
+        },
+        logout: () => dispatch(logout()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
